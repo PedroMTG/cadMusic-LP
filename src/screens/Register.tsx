@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Pressable } from 'react-native';
 import axios from "axios";
+import RegisterStyles from './RegisterStyles';
 
-export function Register({ navigation }: any) {
+export function Register({ navigation }: any) {{
   const [nome, setNome] = useState("");
   const [duracao, setDuracao] = useState("");
   const [compositor, setCompositor] = useState("");
@@ -26,32 +27,38 @@ export function Register({ navigation }: any) {
   }
 
   return (
-    <View>
-      <View>
-        <Text>Cadastre um nova música em sua Playlist</Text>
-      </View>
-      <View>
-        <TextInput
-          placeholder='nome da música'
-          onChangeText={setNome}
-        />
-        <TextInput
-          placeholder='duração da música'
-          onChangeText={setDuracao}
-        />
-        <TextInput
-          placeholder='compositor'
-          onChangeText={setCompositor}
-        />
-        <TextInput
-          placeholder='estilo'
-          onChangeText={setEstilo}
-        />
-        <Pressable onPress={salvar}>
-          <Text>SALVAR</Text>
-        </Pressable>
+    <View style={RegisterStyles.container}>
+      <View style={RegisterStyles.container2}>
+        <View style={RegisterStyles.conteudo1}>
+          <Text style={RegisterStyles.texto}>Cadastre um nova música em sua Playlist</Text>
+        </View>
+        <View>
+          <TextInput style={RegisterStyles.input}
+            placeholder='nome da música'
+            onChangeText={setNome}
+          />
+          <TextInput
+            style={RegisterStyles.input}
+            placeholder='duração da música'
+            onChangeText={setDuracao}
+          />
+          <TextInput
+            style={RegisterStyles.input}
+            placeholder='compositor'
+            onChangeText={setCompositor}
+          />
+          <TextInput
+            style={RegisterStyles.input}
+            placeholder='estilo'
+            onChangeText={setEstilo}
+          />
+          <Pressable onPress={salvar} >
+            <Text style={RegisterStyles.botao}>SALVAR</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 }
 
+}

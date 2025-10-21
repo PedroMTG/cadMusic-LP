@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Pressable } from 'react-native';
 import { Ionicons } from "@expo/vector-icons"; //ícones
 import axios from 'axios'; //manipulação dos dados da API
-
+import HomeStyles from './HomeStyles';
 export function Home({ navigation }: any) {
     const [musicas, setMusicas] = useState<any[]>([]); //useState recebendo um vetor
 
@@ -18,29 +18,32 @@ export function Home({ navigation }: any) {
     }, [])
 
     return (
-        <View>
-            <View>
-                <Text>
-                    Lista de Músicas
-                </Text>
-                <Pressable onPress={navToRegister}>
-                    <Ionicons name="add-circle" size={60} color="#000000ff" />
-                </Pressable>
+        <View style={HomeStyles.container}>
+           
+                <View style={HomeStyles.containercima}>
+                    <Text style={HomeStyles.titulo}>
+                        Lista de Músicas
+                    </Text>
+                    <Pressable onPress={navToRegister}>
+                        <Ionicons name="add-circle" size={60} color="#000000ff" />
+                    </Pressable>
+                </View>
+                <View style={HomeStyles.listaFlat}>
+                    <FlatList 
+                        data={musicas}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <View style={HomeStyles.lista}>
+                                <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.nome}</Text>
+                                <View style={HomeStyles.contItems}>
+                                    <Text style={HomeStyles.textoItem}>{item.compositor}</Text>
+                                    <Text style={HomeStyles.textoItem}>{item.duracao}</Text>
+                                    <Text style={HomeStyles.textoItem}>{item.estilo}</Text>
+                                </View>
+                            
+                            </View>
+                        )}/>
             </View>
-            <FlatList
-                data={musicas}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <View>
-                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.nome}</Text>
-                        <View>
-                            <Text>{item.compositor}</Text>
-                            <Text>{item.duracao}</Text>
-                            <Text>{item.estilo}</Text>
-                        </View>
-                        <Ionicons name="play-circle" size={30} style={{ marginLeft: 10, color: "#3057f3ff" }} />
-                    </View>
-                )}/>
         </View>
     );
 }
